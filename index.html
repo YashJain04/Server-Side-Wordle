@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang = "en">
     <head>
+        <!-- Details -->
         <meta charset = "UTF-8">
-        <meta name = "description" content = "This page is Group 4's submission for CSI 3140 - Assignment 2 - Wordle Implementation">
+        <meta name = "description" content = "This page is Group 4's submission for CSI 3140 - Assignment 3 - Wordle Implementation With Server Side Scripting">
         <meta name = "author" content = "Yash Jain - 300245571 & Oliver Byl - 300168571">
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
 
@@ -12,38 +13,44 @@
     </head>
 
     <body>
+        <!-- Banner -->
         <header class = "header-container">
             WORDLE
         </header>
 
         <main>
+            <!-- The actual game board -->
             <div class = "game-board" id = "game-board">
             </div>
 
+            <!-- Leaderboard -->
             <div class = "leaderboard" id = "leaderboard">
-                <h1 class = "leaderboard-title"> LEADERBOARD </h1>
+                <h1 class = "leaderboard-title"> LEADERBOARD </h1> <!-- Leaderboard title -->
 
-                <img class = "leaderboard-icon" alt = "icon for the leaderboard" src = "/images/leaderboard-icon.png">
+                <!-- Leaderboard image icon-->
+                <img class = "leaderboard-icon" alt = "icon for the leaderboard" src = "/docs/design_system/leaderboard-icon.png">
 
+                <!-- All of the users scores -->
                 <div class = "leaderboard-all-scores">
-                    <p id = "leaderboard-score-one"> TOP 1 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-two"> TOP 2 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-three"> TOP 3 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-four"> TOP 4 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-five"> TOP 5 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-six"> TOP 6 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-seven"> TOP 7 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-eight"> TOP 8 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-nine"> TOP 9 SCORE: x GUESSES </p>
-                    <p id = "leaderboard-score-ten"> TOP 10 SCORE: x GUESSES </p>
+                    <p id = "leaderboard-score-1">TOP 1 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-2">TOP 2 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-3">TOP 3 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-4">TOP 4 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-5">TOP 5 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-6">TOP 6 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-7">TOP 7 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-8">TOP 8 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-9">TOP 9 SCORE: X ATTEMPTS</p>
+                    <p id = "leaderboard-score-10">TOP 10 SCORE: X ATTEMPTS</p>
                 </div>
             </div>
 
-            <h1 id = "reveal-answer"></h1>
+            <h1 id = "reveal-answer"></h1> <!-- Element to show the answer or display to user that the word entered is invalid -->
         </main>
 
-        <button class = "generate" onclick = "window.location.reload();">PLAY AGAIN</button>
+        <button class = "generate" id ="play-again-button" onclick = "playAgain()">PLAY AGAIN</button> <!-- Play again button -->
 
+        <!-- Footer -->
         <footer class = "footer-container">
             COPYRIGHT 2024 - CSI 3140 A3
         </footer>

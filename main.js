@@ -26,6 +26,8 @@ let letterIdentity = "letter"; //variable used to track the unique letter in the
 
 let answer = document.getElementById("reveal-answer"); //reveal text for answer or incorrect word
 
+let score = 0; //users score
+
 //on window load event call the function to create the squares for the letters and track key inputs from user
 window.onload = function() {
     createSquaresForLetters();
@@ -101,8 +103,8 @@ function userFunctionality(keyPressed) {
                 currentLetter = document.getElementById(letterIdentity + counter);
                 if (currentLetter.innerHTML === "") {
                     currentLetter.innerHTML = keyPressed.key.toUpperCase();
-                    counter++;
-                    usersCurrentColumn++;
+                    counter = counter + 1;
+                    usersCurrentColumn = usersCurrentColumn + 1;
                 }
             }
         }
@@ -141,21 +143,25 @@ function userFunctionality(keyPressed) {
 
 //function to call server and retrieve the word
 function getWordFromServer() {
-    let xhr = new XMLHttpRequest(); //create an AJAX request
-    xhr.open('POST', 'wordle.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = JSON.parse(xhr.responseText); //use the JSON API
+    let ajaxXHR = new XMLHttpRequest(); //create an AJAX request
+
+    ajaxXHR.open('POST', 'wordle.php', true);
+    ajaxXHR.setRequestHeader('Content-Type', 'application/json');
+    ajaxXHR.onreadystatechange = function() {
+
+        if (ajaxXHR.readyState === XMLHttpRequest.DONE) {
+            if (ajaxXHR.status === 200) {
+                let data = JSON.parse(ajaxXHR.responseText); //use the JSON API
                 word = data.word; //retrieve the answer
-                console.log(word); //console.log the answer for accessibility
-            } else {
-                console.error('Error fetching word:', xhr.statusText); //error fetching word
+                console.log('ANSWER: ' + word); //console.log the answer for accessibility
+            }
+            
+            else {
+                console.error('Error fetching word:', ajaxXHR.statusText); //error fetching word
             }
         }
     };
-    xhr.send(JSON.stringify({ action: 'getWord' })); //use the JSON API
+    ajaxXHR.send(JSON.stringify({ action: 'getWord' })); //use the JSON API
 }
 
 //function that calls the server to check the users attempted guess with the answer
@@ -170,36 +176,47 @@ function checkUsersGuess() {
 
     attemptedGuess = attemptedGuess.toLowerCase(); //turn lower case so we can compare to see if it exists in the word list
 
-    let xhr = new XMLHttpRequest(); //create an AJAX request
-    xhr.open('POST', 'wordle.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let data = JSON.parse(xhr.responseText); //use the JSON API
+    let ajaxXHR = new XMLHttpRequest(); //create an AJAX request
+    ajaxXHR.open('POST', 'wordle.php', true);
+    ajaxXHR.setRequestHeader('Content-Type', 'application/json');
+    ajaxXHR.onreadystatechange = function() {
+
+        if (ajaxXHR.readyState === XMLHttpRequest.DONE) {
+            if (ajaxXHR.status === 200) {
+                let data = JSON.parse(ajaxXHR.responseText); //use the JSON API
+
                 if (data.valid) {
                     answer.innerHTML = "";
                     validate(data.result); //call the validate function to apply the necessary styling with a parameter that holds the result
+                    
                     if (data.gameOver) {
                         stateOfGame = false; //games over
                         answer.innerHTML = "ANSWER: " + data.correctWord; //reveal answer
-                    } else {
-                        usersCurrentRow++; //increment the row (next word)
+                    }
+                    
+                    else {
+                        usersCurrentRow = usersCurrentRow + 1; //increment the row (next word)
                         usersCurrentColumn = 1; //set the column back to 1 (first letter)
                         attemptsAtEnter.push(counter - 1); //list to ensure that user cannot click enter at random times and only once the word is complete and is in a different row from before
                     }
-                } else {
+
+                    score = score + 1; //increment the number of attempted guesses for the total score
+                }
+                
+                else {
                     answer.innerHTML = "NOT A VALID WORD"; //reveal that the word entered is INVALID
                 }
-            } else {
-                console.error('Error checking word:', xhr.statusText); //error within server checking word
+            }
+            
+            else {
+                console.error('Error checking word:', ajaxXHR.statusText); //error within server checking word
             }
         }
     };
-    xhr.send(JSON.stringify({ action: 'checkWord', guess: attemptedGuess })); //use the JSON API
+    ajaxXHR.send(JSON.stringify({ action: 'checkWord', guess: attemptedGuess })); //use the JSON API
 }
  
-//check for correct and wrong letters as well letters that are in the word but not in the correct spot
+//function to check for correct and wrong letters as well letters that are in the word but not in the correct spot
 function validate(result) {
     /**
      * result : An array that holds the validation results for each letter in the user's guess
@@ -228,4 +245,67 @@ function validate(result) {
             currentBox.classList.add("incorrect");
         }
     }
+}
+
+//function that clears and resets the game state, so user can play again, and stores the score in the leaderboard
+function playAgain() {
+    // Send the score to the server to be saved in a PHP session
+    let ajaxXHR = new XMLHttpRequest();
+    
+    ajaxXHR.open('POST', 'wordle.php', true);
+    ajaxXHR.setRequestHeader('Content-Type', 'application/json');
+    ajaxXHR.onreadystatechange = function() {
+
+        if (ajaxXHR.readyState === XMLHttpRequest.DONE) {
+            if (ajaxXHR.status === 200) {
+                let data = JSON.parse(ajaxXHR.responseText); //use the JSON API
+                let topScores = data.scores; //retrieve all of the users scores stored in the session
+                console.log('ALL SCORES IN SESSION: ' + topScores); //console.log the results for accessibility
+
+                //update the leaderboard only if user played game through
+                if (!stateOfGame) {
+                    for (let i = 1; i <= Math.min(10, topScores.length); i++) { //get the top 10 scores throughout the entire array
+                        document.getElementById("leaderboard-score-" + i.toString()).innerHTML = "TOP " + i.toString() + " SCORE: " + topScores[i - 1] + " ATTEMPTS";
+                    }
+                }
+
+                //reset the game state
+                stateOfGame = true;
+            }
+            
+            else {
+                console.error('Error sending score:', ajaxXHR.statusText); //error within server sending score
+            }
+        }
+    };
+
+    //only send the score to the server if the game was played through (user can hit play again at anytime but that doesn't mean the score should be sent cause they didnt finish the game)
+    if (!stateOfGame) {
+        ajaxXHR.send(JSON.stringify({ action: 'saveScore', score: score }));
+    }
+
+    //reset the variables back to the original value
+    usersCurrentRow = 1;
+    usersCurrentColumn = 1;
+    counter = 1;
+    attemptsAtEnter = [];
+    answer.innerHTML = "";
+    score = 0;
+
+    //clear the board and reset it
+    for (let position = 1; position <= wordleLetters * numberOfGuesses; position++) {
+        document.getElementById("letter" + position).innerHTML = "";
+        document.getElementById("square" + position).classList.remove("correct", "incorrectSpot", "incorrect");
+    }
+
+    //retrieve a new word from the server
+    getWordFromServer();
+
+    //reattach the event listeners
+    document.removeEventListener("keyup", userFunctionality);
+    document.addEventListener("keyup", userFunctionality);
+
+    //make sure the button is out of focus and the page focuses on the board
+    document.getElementById('play-again-button').blur();
+    document.getElementById("game-board").focus();
 }

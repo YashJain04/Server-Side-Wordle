@@ -13,6 +13,7 @@ SERVER RELATED DETAILS:
 - CHECK PASSES (User entered a valid word that does exist): Server will then continue
 ↪ Server will then check if user guessed the word correctly with their valid word (by comparing each letter in the guess to the actual word answer) and communicate that information back to the client (they won, lost, got an incorrect letter and have more attempts, etc.)
 ↪ For validation the SERVER sends an array back to the client that contains values for each letter in the users guess (in order from left-right in the word and in the array) these values are: correct, incorrectSpot, and incorrect (see more details in the main.js validate function)
+- Server also holds all the scores for the users in an array
 
 CLIENT RELATED DETAILS:
 - Client is still responsible for some functionality this is because some proccesses have no correlation with the server what-so-ever
@@ -30,7 +31,17 @@ Client will handle the following:
 - If the server communicates that the word entered is the actual correct answer then the client process applies the according CSS styling and displays that the game is over (they won)
 */
 
-session_start();
+session_start(); //start the php session
+
+/**
+ * Refesh Session:
+ * - Uncomment the line below to kill the PHP session
+ * - Refresh the webpage
+ * - Comment the line again
+ * - Refresh the webpage and play
+ */
+// session_destroy();
+
 header('Content-Type: application/json'); //JSON FORMAT
 
 //official wordle word list
@@ -53,6 +64,16 @@ function checkWord($guess) {
     return in_array($guess, $officialWordleWordList);
 }
 
+//track the users scores using the SESSION
+function trackScores($score) {
+    if (!isset($_SESSION['scores'])) {
+        $_SESSION['scores'] = [];
+    }
+    $_SESSION['scores'][] = $score; //add the score to the array
+    sort($_SESSION['scores']); //sort it in ascending order so that the top ones are first (lower the number of attempts = better score)
+    return $_SESSION['scores']; //return the array
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input = json_decode(file_get_contents('php://input'), true); //use the JSON API
     
@@ -60,13 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $action = $input['action'];
         
         if ($action === 'getWord') {
-            $word = getNewWord();
-            echo json_encode(['word' => $word]); //use the JSON API
+            $word = getNewWord(); //retrieve a new word
+            echo json_encode(['word' => $word]); //use the JSON API to communicate this word back
         } elseif ($action === 'checkWord' && isset($input['guess'])) {
             $guess = $input['guess'];
             if (checkWord($guess)) { //check the word
-                $_SESSION['guesses'][] = $guess;
-                $word = $_SESSION['word'];
+                $_SESSION['guesses'][] = $guess; //add the guess to the guesses
+                $word = $_SESSION['word']; //the answer for that specific run
                 $correctOccurrences = 0; //increment the correct occurences
                 $result = []; //array that gets communicated back to the client that is used for validation (correct, incorrectSpot, incorrect)
                 
@@ -88,10 +109,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'result' => $result,
                     'gameOver' => $gameOver,
                     'correctWord' => $gameOver ? $word : null
-                ]); //use the JSON API
+                ]); //use the JSON API and communicate states back
             } else {
                 echo json_encode(['valid' => false]); //use the JSON API
             }
+        }
+
+        //if the action is saving the score
+        elseif ($action === 'saveScore' && isset($input['score'])) {
+            $score = $input['score']; //retrieve the score
+            $topScores = trackScores($score); //call the track scores function
+            echo json_encode(['scores' => $topScores]); //communicate the array back to the client
         }
     }
 }
