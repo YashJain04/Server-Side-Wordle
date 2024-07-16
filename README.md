@@ -13,7 +13,7 @@ The answer for the word can be seen in the console for accessibility.
 States Of Game: * Notice how the leaderboard is changing! *
 Initial State: [Initial State Of Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateInitial.png?raw=true)
 Ending State V1 (User Won): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateUserWon.png?raw=true)
-Ending State V2 (User Lost): [User Lost Game Image](https://github.com/YashJain04/Wordle/Server-Side-Wordle/main/docs/design_system/gameStateUserLost.png?raw=true)
+Ending State V2 (User Lost): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/Server-Side-Wordle/main/docs/design_system/gameStateUserLost.png?raw=true)
 
 Running The Game:
 1. CD to your local directory where the game is downloaded
