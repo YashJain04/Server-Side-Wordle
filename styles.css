@@ -96,7 +96,7 @@ html, body {
 
 /* LEADERBOARD STYLES */
 .leaderboard {
-    width: 350px;
+    width: 400px;
     height: 480px;
     background-color: #DFFDFF;
     position: absolute;
@@ -107,7 +107,7 @@ html, body {
     border: 2px solid black;
     margin: 20px;
     margin-top: 30px;
-    transform: translate(80px, -525px);
+    transform: translate(55px, -525px);
 }
 
 .leaderboard::-webkit-scrollbar {

@@ -263,7 +263,12 @@ function playAgain() {
                 //update the leaderboard only if user played game through
                 if (!stateOfGame) {
                     for (let i = 1; i <= Math.min(10, topScores.length); i++) { //get the top 10 scores throughout the entire array
-                        document.getElementById("leaderboard-score-" + i.toString()).innerHTML = "TOP " + i.toString() + " SCORE: " + topScores[i - 1] + " ATTEMPTS";
+                        if (topScores[i-1] != 7) {
+                            document.getElementById("leaderboard-score-" + i.toString()).innerHTML = "TOP " + i.toString() + " SCORE: " + topScores[i - 1] + " ATTEMPTS";
+                        }
+                        else {
+                            document.getElementById("leaderboard-score-" + i.toString()).innerHTML = "TOP " + i.toString() + " SCORE: " + topScores[i - 1] + " ATTEMPTS (LOST)";
+                        }
                     }
                 }
 
