@@ -23,9 +23,9 @@ Ending State (User Lost - Run 3): [User Lost Game Image](https://github.com/Yash
 
 Ending State (User Lost - Run 4): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runFour.png?raw=true)
 
-Ending State (User Won - Run 5): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runFive.png?raw=true)
+Ending State (User Won - Run 5): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runFive.png?raw=true)
 
-Ending State (User Won - Run 6): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runSix.png?raw=true)
+Ending State (User Won - Run 6): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runSix.png?raw=true)
 
 Ending State
 
