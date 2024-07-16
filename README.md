@@ -10,6 +10,8 @@ The game can be played by downloading the repo and hosting the server locally.
 
 The answer for the word can be seen in the console for accessibility.
 
+Note: If you have a score of 7 this indicates you lost the game as the number of guesses allowed in Wordle are MAX 6.
+
 States Of Game: * Notice how the leaderboard is changing! *
 Initial State: [Initial State Of Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateInitial.png?raw=true)
 
