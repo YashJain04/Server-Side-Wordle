@@ -6,13 +6,15 @@ This is the implementation of the Classic Wordle Game using Server Side Scriptin
 
 Please note the directory "/docs/design_system" holds the image assets. Other assets such as fonts are imported directly.
 
-The game can be played at https://yashjain04.github.io/Server-Side-Wordle/
+The game can be played by downloading the repo and hosting the server locally.
 
 The answer for the word can be seen in the console for accessibility.
 
 States Of Game: * Notice how the leaderboard is changing! *
 Initial State: [Initial State Of Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateInitial.png?raw=true)
+
 Ending State V1 (User Won): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateUserWon.png?raw=true)
+
 Ending State V2 (User Lost): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateUserLost.png?raw=true)
 
 Running The Game:
