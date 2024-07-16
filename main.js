@@ -127,12 +127,6 @@ function userFunctionality(keyPressed) {
                 currentLetter.innerHTML = "";
             }
         }
-
-        //if the user has used up all of the guesses then that means the game is over and reveal answer
-        if (usersCurrentRow === numberOfGuesses + 1) {
-            stateOfGame = false;
-            answer.innerHTML = "ANSWER: " + word;
-        }
     }
 
     //if the game ended
@@ -192,6 +186,10 @@ function checkUsersGuess() {
                     if (data.gameOver) {
                         stateOfGame = false; //games over
                         answer.innerHTML = "ANSWER: " + data.correctWord; //reveal answer
+                    }
+
+                    if (usersCurrentRow === numberOfGuesses && attemptedGuess != data.correctWord.toLowerCase()) {
+                        score = score + 1;
                     }
                     
                     else {
