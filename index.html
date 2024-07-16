@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "description" content = "This page is Group 4's submission for CSI 3140 - Assignment 2 - Wordle Implementation">
+        <meta name = "author" content = "Yash Jain - 300245571 & Oliver Byl - 300168571">
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+
+        <link rel = "stylesheet" href = "styles.css">
+
+        <title> Group 4's Wordle With AJAX & PHP </title>
+    </head>
+
+    <body>
+        <header class = "header-container">
+            WORDLE
+        </header>
+
+        <main>
+            <div class = "game-board" id = "game-board">
+            </div>
+
+            <div class = "leaderboard" id = "leaderboard">
+                <h1 class = "leaderboard-title"> LEADERBOARD </h1>
+
+                <img class = "leaderboard-icon" alt = "icon for the leaderboard" src = "/images/leaderboard-icon.png">
+            </div>
+
+            <h1 id = "reveal-answer"></h1>
+        </main>
+
+        <button class = "generate" onclick = "window.location.reload();">PLAY AGAIN</button>
+
+        <footer class = "footer-container">
+            COPYRIGHT 2024 - CSI 3140 A3
+        </footer>
+
+        <script src = "main.js"></script> <!-- Allow for DOM to fully load then insert JS Script -->
+    </body>
+</html>

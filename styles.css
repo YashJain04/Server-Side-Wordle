@@ -1,0 +1,124 @@
+/* ASSETS */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
+html, body {
+    margin: 0%;
+    padding: 0%;
+}
+
+/* HEADER STYLES */
+.header-container {
+    background-color: whitesmoke;
+    text-align: center;
+    padding: 1%;
+    font-family: 'Bebas Neue';
+    font-size: 3.5em;
+    font-weight: bolder;
+    letter-spacing: 5px;
+}
+
+/* MAIN STYLES */
+.game-board {
+    width: 450px;
+    height: 500px;
+    /* background-color: grey; */
+    margin: 0 auto;
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.squares-for-letters {
+    margin: 3px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    width: calc(100% / 7); /* need 5 letters per row - because 5 letter word (use 7 to account for margins and other spacing)*/
+    height: calc(100% / 7.77); /* need 6 rows - because 6 guesses (use 7.77 to account for margins and other spacing as well as square size)*/
+    border: 3px solid lightgrey;
+    text-align: center;
+}
+
+.correct {
+    color: white;
+    border-color: white;
+    background-color: #6AAA6A;
+}
+
+.incorrect {
+    color: white;
+    border-color: white;
+    background-color: #787C7A;
+}
+
+.incorrectSpot {
+    color: white;
+    border-color: white;
+    background-color: #C9B45A;
+}
+
+.letter {
+    margin-top: 12px;
+    font-family: 'Roboto';
+    font-size: 2em;
+}
+
+#reveal-answer {
+    text-align: center;
+    font-family: 'Bebas Neue';
+    margin-bottom: 0;
+}
+
+.generate {
+    font-family: 'Bebas Neue';
+    font-size: 25px;
+    color: black;
+    margin-left: 46%;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    background: linear-gradient(#ebf4f5, #b5c6e0);
+}
+
+/* FOOTER STYLES */
+.footer-container {
+    background-color: whitesmoke;
+    text-align: center;
+    padding: 1%;
+    font-family: 'Bebas Neue';
+    font-size: 1.5em;
+    position: absolute;
+    font-weight: bolder;
+    bottom: 0;
+    width: 100%;
+}
+
+/* LEADERBOARD STYLES */
+.leaderboard {
+    width: 500px;
+    height: 480px;
+    background-color: lightgreen;
+    position: absolute;
+    overflow: scroll;
+    transform: translateY(-525px);
+    text-align: center;
+    font-family: 'Bebas Neue';
+    font-size: 25px;
+    border: 2px solid black;
+    margin: 20px;
+    margin-top: 30px
+}
+
+.leaderboard-title {
+    transform: translateX(-55px);
+    letter-spacing: 3px;
+}
+
+.leaderboard-icon {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    transform: translateX(85px);
+    /* transform: translateY(-95px) */
+    margin-top: -95px;
+}
