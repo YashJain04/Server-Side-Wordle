@@ -15,9 +15,19 @@ Note: If you have a score of 7 this indicates you lost the game as the number of
 States Of Game: * Notice how the leaderboard is changing! *
 Initial State: [Initial State Of Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateInitial.png?raw=true)
 
-Ending State V1 (User Won): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateUserWon.png?raw=true)
+Ending State (User Won - Run 1): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runOne.png?raw=true)
 
-Ending State V2 (User Lost): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/gameStateUserLost.png?raw=true)
+Ending State (User Won - Run 2): [User Won Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runTwo.png?raw=true)
+
+Ending State (User Lost - Run 3): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runThree.png?raw=true)
+
+Ending State (User Lost - Run 4): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runFour.png?raw=true)
+
+Ending State (User Won - Run 5): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runFive.png?raw=true)
+
+Ending State (User Won - Run 6): [User Lost Game Image](https://github.com/YashJain04/Server-Side-Wordle/blob/main/docs/design_system/runSix.png?raw=true)
+
+Ending State
 
 Running The Game:
 1. CD to your local directory where the game is downloaded
